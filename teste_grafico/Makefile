@@ -6,42 +6,37 @@
 #    By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:57:06 by fmoreira          #+#    #+#              #
-#    Updated: 2021/12/10 23:11:37 by fmoreira         ###   ########.fr        #
+#    Updated: 2021/12/11 15:30:18 by fmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= fractol
+CC = gcc
 
-SRC_DIR		= srcs
+CFLAGS= -Imlx -g -Wall -Wextra -Werror
 
-SRCS		= main.c init.c julia.c color.c
+NAME=fractol
 
-SRC		= $(addprefix $(SRC_DIR)/, $(SRCS))
-OBJ			= $(SRCS:.c=.o)
+SRC = $(shell find -name '*.c' | grep "srcs")
+OBJ = $(SRC:%.c=%.o)
 
-CFLAGS		= gcc -Wall -Werror -Wextra
-LIBFLAGS	= -L libft -lft
-MLXFLAGS	= -L mlx -lmlx -framework AppKit -framework OpenGL
-INCLUDES	= -I includes -I libft -I mlx
+LFLAGS = -Lmlx -lmlx -lXext -lX11  -lm -g -Wall -Wextra -Werror
 
-all		: $(NAME)
+all: $(NAME)
 
-$(NAME):
-		@printf "Compiling...\n"
-		@cd ./libft ; @make all ; cd ..
-		@cd ./mlx ; @make all ; cd ..
-		@$(CFLAGS) $(INCLUDES) -c $(SRC)
-		@$(CFLAGS) $(OBJ) $(LIBFLAGS) $(MLXFLAGS) $(INCLUDES) -o $(NAME)
-		@printf "Complete!"
+$(MAKE_ALL):
+		make -C libft
+		make -C mlx
+
+$(NAME):	${OBJ} ${MAKE_ALL}
+		$(MAKE_ALL)
+		$(CC) -o $(NAME) ${OBJ} $(LFLAGS)
+
+
 
 clean:
-		@rm -rf ${OBJ}
-		cd ./libft ; @make clean ; cd ..
-		cd ./mlx ; @make clean ; cd ..
+		rm -f $(OBJ)
 
 fclean:	clean
-		@rm -f $(NAME)
+		rm -f $(NAME)
 
-re:		flcean all
-
-.PHONY:		all fclean clean re
+re:	fclean all
