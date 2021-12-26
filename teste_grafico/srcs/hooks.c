@@ -6,35 +6,37 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 02:54:44 by fmoreira          #+#    #+#             */
-/*   Updated: 2021/12/11 15:51:40 by fmoreira         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:58:44 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int		key_press(int keycode, t_data *f)
+int	key_press(int keycode, t_data *f)
 {
 	ft_bzero(f->img_ptr->data, WIGHT * HEIGHT * f->img_ptr->bpp);
 	if (keycode == 53)
 		exit(0);
-		else if (keycode == 126 || keycode == 13)
-			f->moveY -= 0.1 / f->zoom;
-		else if (keycode == 125 || keycode == 1)
-			f->moveY += 0.1 / f->zoom;
-		else if (keycode == 124 || keycode == 2)
-			f->moveX += 0.1 || f->zoom;
-		else if (keycode == 123 || keycode == 0)
-			f->moveX -= 0.1 / f->zoom;
-		else if (keycode == 69 || keycode == 24)
-			f->max_interation += 1;
-		else if (keycode == 78 || keycode == 27)
-			f->max_interation -= 1;
-		else if (keycode == 8)
-			f->color += 1;
-		return(0);
+	else if (keycode == 126 || keycode == 13)
+		f->moveY -= 0.1 / f->zoom;
+	else if (keycode == 125 || keycode == 1)
+		f->moveY += 0.1 / f->zoom;
+	else if (keycode == 124 || keycode == 2)
+		f->moveX += 0.1 || f->zoom;
+	else if (keycode == 123 || keycode == 0)
+		f->moveX -= 0.1 / f->zoom;
+	else if (keycode == 69 || keycode == 24)
+		f->max_interation += 1;
+	else if (keycode == 78 || keycode == 27)
+		f->max_interation -= 1;
+	else if (keycode == 8)
+		f->color += 1;
+	if (!ft_strcmp(f->name, "julia"))
+		mlx_hook(f->win_ptr, 6, 0, mouse_move, f);
+	return(0);
 }
 
-int		mouse_press(int button, int x, int y, t_data *f)
+int	mouse_press(int button, int x, int y, t_data *f)
 {
 	ft_bzero(f->img_ptr->data, WIGHT * HEIGHT * f->img_ptr->bpp);
 	if (button == 4)
@@ -49,10 +51,12 @@ int		mouse_press(int button, int x, int y, t_data *f)
 		f->moveX += (x - WIGHT / 2) * 0.0015 / f->zoom;
 		f->zoom *= 0.8;
 	}
+	if (!ft_strcmp(f->name, "julia"))
+		mlx_hook(f->win_ptr, 6, 0, mouse_move, f);
 	return (0);
 }
 
-int		mouse_move(int x, int y, t_data *f)
+int	mouse_move(int x, int y, t_data *f)
 {
 	ft_bzero(f->img_ptr->data, WIGHT * HEIGHT * f->img_ptr->bpp);
 	f->c_im = (y - HEIGHT / 2) / (0.25 * HEIGHT * f->zoom) + f->moveY;

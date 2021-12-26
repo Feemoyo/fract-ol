@@ -6,7 +6,7 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 20:57:47 by fmoreira          #+#    #+#             */
-/*   Updated: 2021/12/11 15:08:15 by fmoreira         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:07:16 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define WIGHT 720
-# define HEIGHT 720
+# define WIGHT 600
+# define HEIGHT 600
 
 typedef struct s_img
 {
@@ -58,9 +58,9 @@ t_img	*init_img(void *mlx);
 void	julia(t_data *f);
 void	draw_julia(t_data *f);
 void	color(t_data *f);
-int	key_press(int keycode, t_data *f);
-int	mouse_press(int button, int x, int y, t_data *f);
-int	mouse_move(int x, int y, t_data *f);
+int		key_press(int keycode, t_data *f);
+int		mouse_press(int button, int x, int y, t_data *f);
+int		mouse_move(int x, int y, t_data *f);
 
 
 #endif
