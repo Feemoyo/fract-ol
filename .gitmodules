@@ -1,0 +1,3 @@
+[submodule "fractol_rework/fractol_rework/libs/libft"]
+	path = fractol_rework/fractol_rework/libs/libft
+	url = https://github.com/Feemoyo/Libft
