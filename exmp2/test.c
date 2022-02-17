@@ -5,7 +5,7 @@
 # define WIN_WIDTH 500
 # define WIN_HEIGHT 500
 
-# define IMG_WIDTH 300
+# define IMG_WIDTH 400
 # define IMG_HEIGHT 300
 
 typedef struct	s_img
@@ -44,9 +44,11 @@ int	main(void)
 	count_h = -1;
 	while (++count_h < IMG_HEIGHT)
 	{
+		printf("\n count_h: %d \n", count_h);
 		count_w = -1;
 		while (++count_w < IMG_WIDTH)
 		{
+			printf("\n count_w: %d \n", count_w);
 			if (count_w % 2)
 				img.data[count_h * IMG_WIDTH + count_w] = 0xFFFFFF;
 			else
