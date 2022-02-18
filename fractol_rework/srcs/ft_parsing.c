@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 05:11:21 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/02/17 16:40:20 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:47:39 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_usage(void)
 	exit(42);
 	}
 
-	void	*ft_fract_sets(char	*set)
+	void	*ft_fract_sets(char *set)
 	{
 		if (!ft_strncmp(set, "Mandelbrot", ft_max(ft_strlen(set), 10)))
 			return (&ft_draw_mandelbrot);
@@ -61,7 +61,7 @@ static void	ft_usage(void)
 		}
 	}
 
-t_fractal	check_args(int argc, char **argv)
+t_fractal	ft_check_args(int argc, char **argv)
 {
 	t_fractal	fract;
 	

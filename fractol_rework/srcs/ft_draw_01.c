@@ -6,13 +6,13 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 08:39:43 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/01/18 10:05:25 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:11:58 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	draw_pixel(t_image *image, int x, int y, int color)
+void	ft_draw_pixel(t_image *image, int x, int y, int color)
 {
 	char	*pixel;
 	int		i;
@@ -35,7 +35,7 @@ void	draw_pixel(t_image *image, int x, int y, int color)
 	}
 }
 
-int	clear_window(t_image *image, int color)
+int	ft_clear_window(t_image *image, int color)
 {
 	int	i;
 	int	j;
@@ -46,8 +46,8 @@ int	clear_window(t_image *image, int color)
 		j = -1;
 		while (++j < HEIGHT)
 		{
-			if (get_pixel_color(i, j, image) > 0)
-				draw_pixel(image, i, j, color);
+			if (ft_get_pixel_color(i, j, image) > 0)
+				ft_draw_pixel(image, i, j, color);
 		}
 	}
 	mlx_put_image_to_window(image->display->mlx_ptr,
@@ -55,7 +55,7 @@ int	clear_window(t_image *image, int color)
 	return (0);
 }
 
-void	draw_ui(t_image *image)
+void	ft_draw_ui(t_image *image)
 {
 	int	coord[2];
 	int	dim[2];
@@ -64,7 +64,7 @@ void	draw_ui(t_image *image)
 	coord[1] = HEIGHT / 3;
 	dim[0] = 200;
 	dim[1] = 100;
-	draw_rectangle(image, build_rectangle(coord, dim, 0x303030, FALSE));
+	ft_draw_rectangle(image, ft_build_rectangle(coord, dim, 0x303030, FALSE));
 	mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
 	mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
@@ -77,7 +77,7 @@ void	draw_ui(t_image *image)
 			WIDTH / 2 - 70, coord[1] + 80, 0x00ffaa, "Reset: R");
 }
 
-t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)
+t_circle	*ft_build_circle(int coord[2], double r, int color, t_bool bord)
 {
 	t_circle	*circle;
 
@@ -101,14 +101,14 @@ t_circle	*build_circle(int coord[2], double r, int color, t_bool bord)
 	return (circle);
 }
 
-void	draw_circle(t_image *image, t_circle *circle)
+void	ft_draw_circle(t_image *image, t_circle *circle)
 {
 	int	i;
 	int	j;
 
 	if (circle == NULL)
 	{
-		free_n_destroy(image, image->display);
+		ft_free_n_destroy(image, image->display);
 		ft_error("mallorc");
 	}
 	i = circle->x_c - circle->r - 1;
@@ -120,11 +120,11 @@ void	draw_circle(t_image *image, t_circle *circle)
 			if (circle->border_only == TRUE
 					&& sqrt(pow(circle->x_c - 1, 2) + pow(circle->y_c - j, 2))
 					== circle->r)
-				draw_pixel(image, i, j, circle->color);
+				ft_draw_pixel(image, i, j, circle->color);
 			else if (circle->border_only == FALSE
 					&& sqrt(pow(circle->x_c - i, 2) + pow(circle->y_c - j, 2))
 					<= circle->r)
-				draw_pixel(image, i, j, circle->color);
+				ft_draw_pixel(image, i, j, circle->color);
 		}
 	}
 	free(circle);

@@ -6,13 +6,13 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 11:09:54 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/01/28 20:19:23 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:40:05 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_rectangle	*build_rectangle(int coord[2], int dim[2], int color, t_bool bord)
+t_rectangle	*ft_build_rectangle(int coord[2], int dim[2], int color, t_bool bord)
 {
 	t_rectangle	*rectangle;
 
@@ -40,14 +40,14 @@ t_rectangle	*build_rectangle(int coord[2], int dim[2], int color, t_bool bord)
 	return (rectangle);
 }
 
-void	draw_rectangle(t_image *image, t_rectangle *rectangle)
+void	ft_draw_rectangle(t_image *image, t_rectangle *rectangle)
 {
 	int	i;
 	int	j;
 
 	if (rectangle == NULL)
 	{
-		free_n_destroy(image, image->display);
+		ft_free_n_destroy(image, image->display);
 		ft_error("malloc (draw_rectangle)");
 	}
 	i = rectangle->x - 1;
@@ -59,9 +59,9 @@ void	draw_rectangle(t_image *image, t_rectangle *rectangle)
 			if (rectangle->border_only == TRUE
 					&& (i == rectangle->x || i == rectangle->x + rectangle->width)
 					&& (j == rectangle->y || j == rectangle->y + rectangle->height))
-				draw_pixel(image, i, j, rectangle->color);
+				ft_draw_pixel(image, i, j, rectangle->color);
 			else if (rectangle->border_only == FALSE)
-				draw_pixel(image, i, j, rectangle->color);
+				ft_draw_pixel(image, i, j, rectangle->color);
 		}
 	}
 	free(rectangle);

@@ -6,7 +6,7 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 04:23:51 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/02/11 04:40:06 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:28:41 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_julia(t_complex c, t_complex param, int max_iter)
 		return (n;)
 }
 
-void	draw_julia(t_fractal para, int xrange[2], int yrange[2])
+void	ft_draw_julia(t_fractal para, int xrange[2], int yrange[2])
 {
 	t_complex	c;
 	int			x;
@@ -49,9 +49,9 @@ void	draw_julia(t_fractal para, int xrange[2], int yrange[2])
 					/ (WIN_H)) + para.max_im;
 			n = ft_julia(c, para.param, para.max_iter);
 			if (n == -1)
-				draw_pixel(para.image, x, y, 0);
+				ft_draw_pixel(para.image, x, y, 0);
 			else
-				draw_pixel(para.image, x, y, para.color_ft(n, para.max_iter));
+				ft_draw_pixel(para.image, x, y, para.color_ft(n, para.max_iter));
 		}
 	}
 }
