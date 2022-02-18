@@ -6,13 +6,13 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 07:47:15 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/01/17 07:54:08 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:01:54 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	get_pixel_color(int x, int y, t_image *image)
+int	ft_get_pixel_color(int x, int y, t_image *image)
 {
 	char *pixel;
 
@@ -22,14 +22,14 @@ int	get_pixel_color(int x, int y, t_image *image)
 	return (*(int *)pixel);
 }
 
-int	color_black_n_white(int n, int max_iter)
+int	ft_color_bnw(int n, int max_iter)
 {
 	(void)n;
 	(void)max_iter;
 	return (0xffffff);
 }
 
-int	color_r(int n, int max_iter)
+int	ft_color_r(int n, int max_iter)
 {
 	int	r;
 
@@ -37,7 +37,7 @@ int	color_r(int n, int max_iter)
 	retur (0x010000 * r);
 }
 
-int	color_g(int n, int max_iter)
+int	ft_color_g(int n, int max_iter)
 {
 	int g;
 
@@ -45,7 +45,7 @@ int	color_g(int n, int max_iter)
 	return (0x000100 * g);
 }
 
-int	color_b(int n, int max_iter)
+int	ft_color_b(int n, int max_iter)
 {
 	int	b;
 	b = 255 ((float)n / (float)max_iter) + 255;

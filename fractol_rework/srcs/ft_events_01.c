@@ -6,13 +6,13 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 11:49:50 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/01/29 13:01:20 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:59:58 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	loop_handler(t_image *image)
+int	ft_loop_handler(t_image *image)
 {
 	int	xrange[2];
 	int	yrange[2];
@@ -31,11 +31,63 @@ int	loop_handler(t_image *image)
 		image->fractal.display_ui == FALSE;
 	}
 	else if (image->fractal.display_ui == TRUE)
-		draw_ui(image);
+		ft_draw_ui(image);
 	return (0);
 }
 
-void	reset_ui(t_image *image)
+int	ft_keys_handler(int key_sym, t_image *image)
+{
+	if (key_sym == XK_Escape)
+		ft_red_cross_handler(image);
+	else if (key_sym == XK_r)
+		ft_reset(image);
+	else if (key_sym == XK_h)
+		ft_reset_ui(image);
+	else if (key_sym == XK_w)
+		ft_zoom_in(image);
+	else if (key_sym == XK_q)
+		ft_zoom_out(image);
+	else if (key_sym == XL_KP_add && image->fractal.max_iter < 100)
+	{
+		image->fractal.max_iter +=4;
+		image->fractal.render = TRUE;
+	}
+	else if (key_sym == XK_KP_Subtract && image->fractal.max_iter >= 10)
+	{
+		image->fractal.max_iter -= 4;
+		image->fractal.render = TRUE;
+	}
+	return (0);
+}
+
+int	ft_pointer_handler(int x, int y, t_image *image)
+{
+	if (image->fractal.draw_ft == &draw_julia
+			&& x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	{
+		image->fractal.param.re = xrange
+				* ((image->fractal.max_re - image->fractal.min_re)
+					/ (WIDTH)) + image->fractal.min_re;
+		image->fractal.param.im = (-1 * y)
+				* ((image->fractal.max_im - image->fractal.min_im)
+					/ (HEIGHT)) + image->fractal.max_im;
+		image->fractal.render = TRUE;
+	}
+	return (0);
+}
+
+int	ft_button_handler(int button, int x, int y, t_image *image)
+{
+	(void)x;
+	(void)y;
+	if (button == 5)
+		ft_zoom_out(image);
+	else if (button == 4)
+		ft_zoom_in(image);
+	return (0);
+}
+
+void	ft_reset_ui(t_image *image)
 {
 	int	xrange[2];
 	int	yrange[2];
@@ -55,56 +107,4 @@ void	reset_ui(t_image *image)
 	}
 	else
 		image->fractal.display_ui = TRUE;
-}
-
-int	keys_handler(int key_sym, t_image *image)
-{
-	if (key_sym == XK_Escape)
-		red_cross_handler(image);
-	else if (key_sym == XK_r)
-		reset(image);
-	else if (key_sym == XK_h)
-		reset_ui(image);
-	else if (key_sym == XK_w)
-		zoom_in(image);
-	else if (key_sym == XK_q)
-		zoom_out(image);
-	else if (key_sym == XL_KP_add && image->fractal.max_iter < 100)
-	{
-		image->fractal.max_iter +=4;
-		image->fractal.render = TRUE;
-	}
-	else if (key_sym == XK_KP_Subtract && image->fractal.max_iter >= 10)
-	{
-		image->fractal.max_iter -= 4;
-		image->fractal.render = TRUE;
-	}
-	return (0);
-}
-
-int	pointer_handler(int x, int y, t_image *image)
-{
-	if (image->fractal.draw_ft == &draw_julia
-			&& x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-	{
-		image->fractal.param.re = xrange
-				* ((image->fractal.max_re - image->fractal.min_re)
-					/ (WIDTH)) + image->fractal.min_re;
-		image->fractal.param.im = (-1 * y)
-				* ((image->fractal.max_im - image->fractal.min_im)
-					/ (HEIGHT)) + image->fractal.max_im;
-		image->fractal.render = TRUE;
-	}
-	return (0);
-}
-
-int	button_handler(int button, int x, int y, t_image *image)
-{
-	(void)x;
-	(void)y;
-	if (button == 5)
-		zoom_out(image);
-	else if (button == 4)
-		zoom_in(image);
-	return (0);
 }

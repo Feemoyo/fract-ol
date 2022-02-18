@@ -6,45 +6,15 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 13:43:29 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/02/01 08:16:59 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:38:46 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float	complex_magnitude(t_complex z)
+float	ft_complex_magnitude(t_complex z)
 {
 	return (sqrt(pow(z.re, 2) + pow(z.im, 2)));
-}
-
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-t_bool ft_c_in_charset(char c, char *charset)
-{
-	while (*charset)
-	{
-		if (c == *charset)
-			return (TRUE);
-		++charset;
-	}
-	return (FALSE);
-}
-
-t_bool	ft_is_charset(const char *str, char *charset)
-{
-	int	len;
-
-	len = 0;
-	while (ft_c_in_charset(str[len], charset) == TRUE && str[len])
-		++len;
-	if (str[len] == '\0')
-		return (TRUE);
-	return (FALSE);
 }
 
 float	ft_atof(char *str)
@@ -72,4 +42,34 @@ float	ft_atof(char *str)
 		result += (float)ft_atof(str + i) / pow(10, len);
 	}
 	return (result);
+}
+
+t_bool	ft_c_in_charset(char c, char *charset)
+{
+	while (*charset)
+	{
+		if (c == *charset)
+			return (TRUE);
+		++charset;
+	}
+	return (FALSE);
+}
+
+t_bool	ft_is_charset(const char *str, char *charset)
+{
+	int	len;
+
+	len = 0;
+	while (ft_c_in_charset(str[len], charset) == TRUE && str[len])
+		++len;
+	if (str[len] == '\0')
+		return (TRUE);
+	return (FALSE);
+}
+
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }

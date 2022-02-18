@@ -6,7 +6,7 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 06:47:28 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/01/17 07:00:52 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:50:10 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,56 @@ typedef struct s_rectangle
 	t_bool	border_only;
 }	t_rectangle;
 
-
+//	ft_couloring_01.c
+int	ft_get_pixel_color(int x, int y, t_image *image);
+int	ft_color_bnw(int n, int max_iter);
+int	ft_color_r(int n, int max_iter);
+int	ft_color_g(int n, int max_iter);
+int	ft_color_g(int n, int max_iter);
+//	ft_couloring_02.c
+int	ft_color_b(int n, int max_iter);
+int	ft_color_grayscale(int n, int max_iter);
+int	ft_color_multi(int n, int max_iter);
+//	ft_data.c
+void	ft_error(const char *ft_name);
+void	ft_free_n_destroy(t_image *image, t_display *display);
+t_image	*ft_init_image(t_display *display);
+t_display	*ft_init_display(char *win_name);
+//	ft_draw_01.c
+void	ft_draw_pixel(t_image *image, int x, int y, int color);
+int	ft_clear_window(t_image *image, int color);
+void	ft_draw_ui(t_image *image);
+t_circle	*ft_build_circle(int coord[2], double r, int, t_bool bord);
+void	ft_draw_circle(t_image image, t_circle *circle);
+//	ft_draw_02.c
+t_rectangle	*ft_build_rectangle(int coord[2], int dim[2], int color, t_bool bord);
+void	ft_draw_rectangle(t_image	*image, t_rectangle *rectangle);
+//	ft_events_01.c
+int	ft_loop_handler(t_image *image);
+int	ft_keys_handler(int key_sym, t_image *image);
+int	ft_pointer_handler(int x, int y, t_image *image);
+int	ft_botton_handler(int button, int x, int y, t_image *image);
+void	ft_reset_ui(t_image *image);
+//	ft_events_02.c
+int	ft_red_cross_handler(t_image *image);
+//	ft_julia.c
+static int	ft_julia(t_complex c, t_complex param, int max_iter);
+void	ft_draw_julia(t_fractal para, int xrange[2], int yrange[2]);
+//	ft_mandelbrot.c
+static int	ft_mamdelbrot(t_complex c, int max_iter);
+void	ft_draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2]);
+//	ft_parsing.c
+static void	ft_usage(void);
+void	*ft_fract_sets(char *set);
+void	*ft_color_sets(char color);
+t_fractal	ft_check_args(int argc, char **argv);
+//	ft_utils.c
+float	ft_complex_magnitude(t_complex z);
+float	ft_atof(char *str);
+t_bool	ft_c_in_charset(char c, char *charset);
+t_bool	ft_is_charset(const char *str, char *charset);
+int	ft_max(int a, int b);
+//	ft_zoom.c
+void	ft_zoom_in(t_image *img);
+void	ft_zoom_out(t_image *img);
+void	ft_reset(t_image *img)

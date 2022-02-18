@@ -6,7 +6,7 @@
 /*   By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 08:18:07 by fmoreira          #+#    #+#             */
-/*   Updated: 2022/01/17 08:45:34 by fmoreira         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:08:54 by fmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error(const char *ft_name)
 	exit(EIXT_FAILURE);
 }
 
-void	free_n_destroy(t_image *image, t_display *display)
+void	ft_free_n_destroy(t_image *image, t_display *display)
 {
 	if (image && image->image_ptr)
 		mlx_destroy_image(image->display->mlx_ptr, image->image_ptr);
@@ -46,7 +46,7 @@ void	free_n_destroy(t_image *image, t_display *display)
 	}
 }
 
-t_image	*init_image(t_display *display)
+t_image	*ft_init_image(t_display *display)
 {
 	t_image *image;
 
@@ -58,7 +58,7 @@ t_image	*init_image(t_display *display)
 	}
 	if (image == NULL || display == NULL)
 	{
-		free_n_destroy(image, display);
+		ft_free_n_destroy(image, display);
 		ft_error("init_image (init_image)");
 	}
 	image->display = display;
@@ -67,13 +67,13 @@ t_image	*init_image(t_display *display)
 				&image->bpp, &image->size_line, &image->endian);
 	if (image == NULL || image->image_ptr == NULL || image->addr == NULL)
 	{
-		free_n_destroy(image, display);
+		ft_free_n_destroy(image, display);
 		ft_error("mlx_new_image (init_image)");
 	}
 	return (image);
 }
 
-t_display	*init_display(char *win_name)
+t_display	*ft_init_display(char *win_name)
 {
 	t_display	*display;
 
@@ -90,7 +90,7 @@ t_display	*init_display(char *win_name)
 				WIDTH, HEIGHT, win_name);
 	if (display->win_ptr == NULL)
 	{
-		free_n_destroy(NULL, display);
+		ft_free_n_destroy(NULL, display);
 		ft_error("mlx_new_window (init_display)")
 	}
 	return (display);
