@@ -33,6 +33,13 @@ $(LIBS):
 	$(LIBSMK) $(MLX)
 
 clean:
-	$(RM) ${OBJ_DIR}
-	${LIBSMK} ${LIBFT} fclean
-	${LIBSMK} ${MLX} fclean
+	${RM} ${OBJ_DIR}
+	${LIBSMK} ${LIBFT} clean
+	${LIBSMK} ${MLX} clean
+
+fclea: clean
+	${RM} ${LIBFT} fclean
+	${RM} ${MLX} fclean
+
+re:	fclean all
+.PHONY: re all clean fclean
