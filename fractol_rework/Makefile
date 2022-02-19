@@ -1,41 +1,38 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fmoreira <fmoreira@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/10 21:57:06 by fmoreira          #+#    #+#              #
-#    Updated: 2022/02/18 19:25:41 by fmoreira         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+CFLAGS = -Wall -Wextra -Werror
 CC = gcc
-CFLAGS= -Wall -Wextra -Werror
 RM = rm -rf
+MLXFLAGS = -lX11 -lXext -lm -lz
+LIBSMK = make -C
 
-NAME = fractol
+SRC_DIR = srcs
+SRC = $(shell find -name '*.c' | grep "srcs" | cut -c 8-)
 
-SRC = $(shell find -name '*.c' | grep "srcs" | cur -c 8-)
-OBJ = $(SRC:%.c=%.o)
+OBJ_DIR = obj
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-LIBLAGS = -lmlx -lXext -lX11 -lm
+INCLUDE_DIR = ./includes
+INCLUDE = fractol.h
 
-all: $(NAME)
+MAIN = srcs/main.c
 
-$(NAME):	${OBJ}
-		@make -C libs/libft
-		@make -C libs/mlx
-		@$(CC) -o $(NAME) ${OBJ} $(LIBFLAGS) $(CFLAGS) libs/mlx/libmlx_Linux.a libs/libft/libft.a
+LIBFT = ./libs/libft.a
+MLX =	./libs/milibx_Linux.a
+LIBS := ${LIBFT} ${MLX}
+
+all:	${NAME}
+
+${NAME}:	${LIBS} ${OBJS}
+	${CC} ${CFLAGS} ${OBJS} ${MLXFLAGS} ${LIBS} -o ${NAME}
+
+${OBJ_DIR}%.o: %.c
+	mkdir -p ${OBJ_DIR}
+	${CC} ${CFLAGS} -c $< -o $@
+
+$(LIBS):
+	$(LIBSMK) $(LIBFT)
+	$(LIBSMK) $(MLX)
 
 clean:
-		@$(RM) $(OBJ)
-		@make clean -C libs/libft
-		@make clean -C libs/mlx
-
-fclean:	clean
-		@$(RM) $(NAME)
-		@make fclean -C libs/libft
-		@make clean -C libs/mlx
-
-re:	fclean all
+	$(RM) ${OBJ_DIR}
+	${LIBSMK} ${LIBFT} fclean
+	${LIBSMK} ${MLX} fclean
