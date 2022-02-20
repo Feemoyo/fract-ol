@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 float	ft_complex_magnitude(t_complex z)
 {
@@ -21,11 +21,11 @@ float	ft_atof(char *str)
 {
 	float			result;
 	int				i;
-	int				sign;
+	//int				sign;
 	unsigned int	len;
 
 	i = 0;
-	sign = 1;
+	//sign = 1;
 	result = 0.0;
 	if (!ft_is_charset(str, "-+.0123456789") || ft_strlen(str) > 12)
 	{

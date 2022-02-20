@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 t_rectangle	*ft_build_rectangle(int coord[2], int dim[2], int color, t_bool bord)
 {

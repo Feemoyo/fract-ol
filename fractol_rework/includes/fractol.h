@@ -13,23 +13,23 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "libft.h"
-# include "mlx.h"
-# include <stdop.h>
+# include "../libs/libft/libft.h"
+# include "../libs/mlx/mlx.h"
+# include <stdio.h>
 # include <stdint.h>
 # include <fcntl.h>
 # include <math.h>
-# include <X11/keysym.h
+# include <X11/keysym.h>
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
 # define WIDTH 800
-# define HEIGHT 600
+# define HEIGHT 800
 
 # define TRUE 1
 # define FALSE 0
 
-# define MAX_ITER 15
+# define MAX_ITER 80
 
 typedef int8_t t_bool;
 
@@ -110,7 +110,7 @@ void	ft_draw_pixel(t_image *image, int x, int y, int color);
 int	ft_clear_window(t_image *image, int color);
 void	ft_draw_ui(t_image *image);
 t_circle	*ft_build_circle(int coord[2], double r, int, t_bool bord);
-void	ft_draw_circle(t_image image, t_circle *circle);
+void	ft_draw_circle(t_image *image, t_circle *circle);
 //	ft_draw_02.c
 t_rectangle	*ft_build_rectangle(int coord[2], int dim[2], int color, t_bool bord);
 void	ft_draw_rectangle(t_image	*image, t_rectangle *rectangle);
@@ -118,18 +118,18 @@ void	ft_draw_rectangle(t_image	*image, t_rectangle *rectangle);
 int	ft_loop_handler(t_image *image);
 int	ft_keys_handler(int key_sym, t_image *image);
 int	ft_pointer_handler(int x, int y, t_image *image);
-int	ft_botton_handler(int button, int x, int y, t_image *image);
+int	ft_button_handler(int button, int x, int y, t_image *image);
 void	ft_reset_ui(t_image *image);
 //	ft_events_02.c
 int	ft_red_cross_handler(t_image *image);
 //	ft_julia.c
-static int	ft_julia(t_complex c, t_complex param, int max_iter);
+//static int	ft_julia(t_complex c, t_complex param, int max_iter);
 void	ft_draw_julia(t_fractal para, int xrange[2], int yrange[2]);
 //	ft_mandelbrot.c
-static int	ft_mamdelbrot(t_complex c, int max_iter);
+//static int	ft_mamdelbrot(t_complex c, int max_iter);
 void	ft_draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2]);
 //	ft_parsing.c
-static void	ft_usage(void);
+//static void	ft_usage(void);
 void	*ft_fract_sets(char *set);
 void	*ft_color_sets(char color);
 t_fractal	ft_check_args(int argc, char **argv);
@@ -142,4 +142,6 @@ int	ft_max(int a, int b);
 //	ft_zoom.c
 void	ft_zoom_in(t_image *img);
 void	ft_zoom_out(t_image *img);
-void	ft_reset(t_image *img)
+void	ft_reset(t_image *img);
+
+#endif

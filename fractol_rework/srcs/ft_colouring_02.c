@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	ft_color_grayscale(int n, int max_iter)
 {
@@ -33,7 +33,7 @@ int	ft_color_multi(int n, int max_iter)
 	x = (float)n / (float)max_iter;
 	if (x >= 0 && x <= 0.5)
 	{
-		r = -510 * x = 255;
+		r = -510 * x - 255;
 		g = 510 * x;
 	}
 	else if (x > 0.5)

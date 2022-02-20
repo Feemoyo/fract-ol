@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 void	ft_error(const char *ft_name)
 {
 	ft_putstr_fd("Error: ", 2);
 	perror(ft_name);
-	exit(EIXT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_free_n_destroy(t_image *image, t_display *display)
@@ -91,7 +91,7 @@ t_display	*ft_init_display(char *win_name)
 	if (display->win_ptr == NULL)
 	{
 		ft_free_n_destroy(NULL, display);
-		ft_error("mlx_new_window (init_display)")
+		ft_error("mlx_new_window (init_display)");
 	}
 	return (display);
 }

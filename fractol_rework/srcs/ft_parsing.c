@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 static void	ft_usage(void)
 {
@@ -53,7 +53,7 @@ static void	ft_usage(void)
 		else if (color == 'B' || color == 'b')
 			return (&ft_color_b);
 		else if (color == 'P' || color == 'p')
-			return (&color_multi);
+			return (&ft_color_multi);
 		else
 		{
 			ft_usage();
@@ -67,7 +67,7 @@ t_fractal	ft_check_args(int argc, char **argv)
 	
 	if (argc > 5 || argc < 3 || argc == 4)
 		ft_usage();
-	fract.draw_ft = fract_sets(argv[1]);
+	fract.draw_ft = ft_fract_sets(argv[1]);
 	if (ft_strlen(argv[2]) > 1)
 		ft_usage();
 	fract.color_ft = ft_color_sets(argv[2][0]);
@@ -81,11 +81,10 @@ t_fractal	ft_check_args(int argc, char **argv)
 				|| fract.param.im > 2 || fract.param.im < -2)
 			ft_usage();
 	}
-	if (fract.param.re == 0 && fract.param.im == 0)
-			&& fract.draw_ft == &draw_julia)
-			ft_putstr_fd("\0 WARNING: default", 1)
-	if (fract.draw_ft == &draw_julia)
-		printf("Julia's parameter = %f%+fi\n",
-				fract.param.re, fract.param.im);
+	if (fract.param.re == 0 && fract.param.im == 0
+			&& fract.draw_ft == &ft_draw_julia)
+			ft_putstr_fd("\0 WARNING: default", 1);
+	if (fract.draw_ft == &ft_draw_julia)
+		ft_putstr_fd("Julia's parameter = OK \n", 1);
 	return (fract);
 }

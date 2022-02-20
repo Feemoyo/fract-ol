@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 static void	ft_init_events(t_display *display, t_image *image)
 {
-	mlx_loop_hook(display->mlx_ptr, &loop_handler, image);
-	mlx_hook(display->win_ptr, DestroyNotify, StructNotifyMask,
-			&red_across_handler, image);
-	mlx_hook(display->win_ptr, KeyPress, KeyPressMask, &keys_handler, image);
+	mlx_loop_hook(display->mlx_ptr, &ft_loop_handler, image);
+	mlx_hook(display->win_ptr, DestroyNotify, StructureNotifyMask,
+			&ft_red_cross_handler, image);
+	mlx_hook(display->win_ptr, KeyPress, KeyPressMask, &ft_keys_handler, image);
 	mlx_hook(display->win_ptr, ButtonPress, ButtonPressMask,
-			&button_handler, image);
-	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask
-			&pointer_handler, image);
+			&ft_button_handler, image);
+	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
+			&ft_pointer_handler, image);
 }
 
 static t_fractal	ft_init_fractal(t_image *image, t_fractal fractal)
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	t_image		*image;
 	t_fractal	fractal;
 
+	printf("\n%s\n", argv[2]);
 	fractal = ft_check_args(argc, argv);
 	display = ft_init_display(argv[1]);
 	image = ft_init_image(display);
@@ -51,6 +52,6 @@ int	main(int argc, char **argv)
 	ft_init_events(display, image);
 	mlx_loop(display->mlx_ptr);
 	ft_free_n_destroy(image, display);
-	ft_putstr_fd("Bye Bye...\nThanks :D\n");
+	ft_putstr_fd("Bye Bye...\nThanks :D\n", 1);
 	return (0);
 }

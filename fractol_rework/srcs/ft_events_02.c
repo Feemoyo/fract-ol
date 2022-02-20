@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	ft_red_cross_handler(t_image *image)
 {
 	ft_free_n_destroy(image, image->display);
-	ft_putstr_fd("Bye...\n");
+	ft_putstr_fd("Bye...\n", 1);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

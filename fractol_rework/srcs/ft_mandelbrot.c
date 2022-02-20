@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 static int	ft_mandelbrot(t_complex c, int max_iter)
 {
@@ -18,10 +18,10 @@ static int	ft_mandelbrot(t_complex c, int max_iter)
 	float		tmp;
 	t_complex	z;
 
-	n = o;
+	n = 0;
 	z.re = 0;
 	z.im = 0;
-	while (pow(z.re, 2) + pow(z.im, 2) < 4 && ++n < max_iter)
+	while (pow(z.re, 2) + pow(z.im, 2) <= 3 && ++n < max_iter)
 	{
 		tmp = pow(z.re, 2) - pow(z.im, 2) + c.re;
 		z.im = 2 * z.re * z.im + c.im;
@@ -41,15 +41,15 @@ void	ft_draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2])
 	int			n;
 
 	x = xrange[0] - 1;
-	while (++x < WIN_W && x <= xrange[1])
+	while (++x < WIDTH && x <= xrange[1])
 	{
 		y = yrange[0] - 1;
-		while (++y < WIN_H && y <= yrange[1])
+		while (++y < HEIGHT && y <= yrange[1])
 		{
 			c.re = x * ((para.max_re - para.min_re)
-					/ (WIN_W)) + para.min_re;
+					/ (WIDTH)) + para.min_re;
 			c.im = (-1 * y) * ((para.max_im - para.min_im)
-					/ (WIN_H)) + para.max_im;
+					/ (HEIGHT)) + para.max_im;
 			n = ft_mandelbrot(c, para.max_iter);
 			if (n == -1)
 				ft_draw_pixel(para.image, x, y, 0);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 void	ft_draw_pixel(t_image *image, int x, int y, int color)
 {
@@ -19,7 +19,7 @@ void	ft_draw_pixel(t_image *image, int x, int y, int color)
 
 	if (x > WIDTH || x < 0 || y > HEIGHT || y < 0)
 	{
-		ft_putstr_fd("Inexistent pixel\n"), 2;
+		ft_putstr_fd("Inexistent pixel\n", 2);
 		return ;
 	}
 	pixel = image->addr + (y * image->size_line + x * (image->bpp / 8));
@@ -62,7 +62,7 @@ void	ft_draw_ui(t_image *image)
 
 	coord[0] = WIDTH / 3 + 30;
 	coord[1] = HEIGHT / 3;
-	dim[0] = 200;
+	dim[0] = 250;
 	dim[1] = 100;
 	ft_draw_rectangle(image, ft_build_rectangle(coord, dim, 0x303030, FALSE));
 	mlx_put_image_to_window(image->display->mlx_ptr,
@@ -109,10 +109,10 @@ void	ft_draw_circle(t_image *image, t_circle *circle)
 	if (circle == NULL)
 	{
 		ft_free_n_destroy(image, image->display);
-		ft_error("mallorc");
+		ft_error("malloc");
 	}
 	i = circle->x_c - circle->r - 1;
-	while (++1 < WIDTH && i < circle->x_c + circle-> r)
+	while (++i < WIDTH && i < circle->x_c + circle-> r)
 	{
 		j = circle->y_c - circle->r - 1;
 		while (++j < HEIGHT && j < circle->y_c + circle->r)

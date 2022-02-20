@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	ft_loop_handler(t_image *image)
 {
@@ -28,7 +28,7 @@ int	ft_loop_handler(t_image *image)
 				image->display->win_ptr, image->image_ptr, 0, 0);
 		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
 				15, 20, 0xffffff, "H for help");
-		image->fractal.display_ui == FALSE;
+		image->fractal.render = FALSE;
 	}
 	else if (image->fractal.display_ui == TRUE)
 		ft_draw_ui(image);
@@ -47,7 +47,7 @@ int	ft_keys_handler(int key_sym, t_image *image)
 		ft_zoom_in(image);
 	else if (key_sym == XK_q)
 		ft_zoom_out(image);
-	else if (key_sym == XL_KP_add && image->fractal.max_iter < 100)
+	else if (key_sym == XK_KP_Add && image->fractal.max_iter < 100)
 	{
 		image->fractal.max_iter +=4;
 		image->fractal.render = TRUE;
@@ -62,10 +62,10 @@ int	ft_keys_handler(int key_sym, t_image *image)
 
 int	ft_pointer_handler(int x, int y, t_image *image)
 {
-	if (image->fractal.draw_ft == &draw_julia
+	if (image->fractal.draw_ft == &ft_draw_julia
 			&& x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 	{
-		image->fractal.param.re = xrange
+		image->fractal.param.re = x
 				* ((image->fractal.max_re - image->fractal.min_re)
 					/ (WIDTH)) + image->fractal.min_re;
 		image->fractal.param.im = (-1 * y)
@@ -92,7 +92,7 @@ void	ft_reset_ui(t_image *image)
 	int	xrange[2];
 	int	yrange[2];
 
-	if	(image->fractol.display_ui == TRUE)
+	if	(image->fractal.display_ui == TRUE)
 	{
 		xrange[0] = WIDTH / 3 + 29;
 		xrange[1] = WIDTH / 3 + 230;
