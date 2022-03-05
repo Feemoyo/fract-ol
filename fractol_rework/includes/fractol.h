@@ -130,7 +130,7 @@ void	ft_draw_julia(t_fractal para, int xrange[2], int yrange[2]);
 void	ft_draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2]);
 //	ft_parsing.c
 //static void	ft_usage(void);
-void	*ft_fract_sets(char *set);
+void	*ft_fract_sets(char *set, int argc);
 void	*ft_color_sets(char color);
 t_fractal	ft_check_args(int argc, char **argv);
 //	ft_utils.c

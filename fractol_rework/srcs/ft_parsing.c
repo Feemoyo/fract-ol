@@ -14,9 +14,9 @@
 
 static void	ft_usage(void)
 {
-	ft_putstr_fd("Usage: ./fractol <name of fractal set> <color mode>", 1);
-	ft_putstr_fd(" [(optional) real part of Julia's parameter] ", 1);
-	ft_putstr_fd("[(optional) imaginary part of Julia's parameter]", 1);
+	ft_putstr_fd("\nUsage: ./fractol <name of fractal set> <color mode>\n", 1);
+	ft_putstr_fd("\n[(optional) real part of Julia's parameter]\n", 1);
+	ft_putstr_fd("\n[(optional) imaginary part of Julia's parameter]\n", 1);
 	ft_putstr_fd("List of sets:\n - Mandelbrot\n - Jullia\n\n", 1);
 	ft_putstr_fd("List of color:\n - BnW or Grayscale: W/S\n - Red, Green ", 1);
 	ft_putstr_fd("or Blue: R/G/B\n - Spectrum: P\n\n", 1);
@@ -27,11 +27,12 @@ static void	ft_usage(void)
 	exit(42);
 	}
 
-	void	*ft_fract_sets(char *set)
+	void	*ft_fract_sets(char *set, int argc)
 	{
 		if (!ft_strncmp(set, "Mandelbrot", ft_max(ft_strlen(set), 10)))
 			return (&ft_draw_mandelbrot);
-		else if (!ft_strncmp(set, "Julia", ft_max(ft_strlen(set), 5)))
+		else if (!ft_strncmp(set, "Julia", ft_max(ft_strlen(set), 5))
+					&& argc == 5)
 			return (&ft_draw_julia);
 		else
 		{
@@ -67,7 +68,7 @@ t_fractal	ft_check_args(int argc, char **argv)
 	
 	if (argc > 5 || argc < 3 || argc == 4)
 		ft_usage();
-	fract.draw_ft = ft_fract_sets(argv[1]);
+	fract.draw_ft = ft_fract_sets(argv[1], argc);
 	if (ft_strlen(argv[2]) > 1)
 		ft_usage();
 	fract.color_ft = ft_color_sets(argv[2][0]);

@@ -21,7 +21,7 @@ static int	ft_mandelbrot(t_complex c, int max_iter)
 	n = 0;
 	z.re = 0;
 	z.im = 0;
-	while (pow(z.re, 2) + pow(z.im, 2) <= 3 && ++n < max_iter)
+	while (pow(z.re, 2) + pow(z.im, 2) < 4 && ++n < max_iter)
 	{
 		tmp = pow(z.re, 2) - pow(z.im, 2) + c.re;
 		z.im = 2 * z.re * z.im + c.im;

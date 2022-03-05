@@ -49,7 +49,7 @@ int	ft_keys_handler(int key_sym, t_image *image)
 		ft_zoom_out(image);
 	else if (key_sym == XK_KP_Add && image->fractal.max_iter < 100)
 	{
-		image->fractal.max_iter +=4;
+		image->fractal.max_iter += 4;
 		image->fractal.render = TRUE;
 	}
 	else if (key_sym == XK_KP_Subtract && image->fractal.max_iter >= 10)

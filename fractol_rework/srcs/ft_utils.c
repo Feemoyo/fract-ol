@@ -21,25 +21,23 @@ float	ft_atof(char *str)
 {
 	float			result;
 	int				i;
-	//int				sign;
 	unsigned int	len;
 
 	i = 0;
-	//sign = 1;
 	result = 0.0;
 	if (!ft_is_charset(str, "-+.0123456789") || ft_strlen(str) > 12)
 	{
 		ft_putstr_fd("ft_atof: invalid input\n", 2);
-		return (0.0);
+		exit (42);
 	}
-	result = (float)ft_atof(str);
+	result = (float)ft_atoi(str);
 	while (str[i] && str[i] != '.')
-		i++;
+		++i;
 	if (str[i] == '.' && str[i + 1])
 	{
 		++i;
-		len = ft_strlen(str) - 1;
-		result += (float)ft_atof(str + i) / pow(10, len);
+		len = ft_strlen(str) - i;
+		result += (float)ft_atoi(str + i) / pow(10, len);
 	}
 	return (result);
 }
@@ -58,11 +56,21 @@ t_bool	ft_c_in_charset(char c, char *charset)
 t_bool	ft_is_charset(const char *str, char *charset)
 {
 	int	len;
+	int dot;
+	int sign;
 
 	len = 0;
+	dot = 0;
+	sign = 0;
 	while (ft_c_in_charset(str[len], charset) == TRUE && str[len])
+	{
+		if (str[len] == '.')
+			dot++;
+		if (str[len] == '+' || str[len] == '-')
+			sign++;
 		++len;
-	if (str[len] == '\0')
+	}
+	if (str[len] == '\0' && dot < 2 && sign < 2)
 		return (TRUE);
 	return (FALSE);
 }

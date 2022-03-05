@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -o3
 
 RM = rm -rf
 MLXFLAGS = -lX11 -lXext -lm -lz

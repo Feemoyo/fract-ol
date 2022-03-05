@@ -20,16 +20,16 @@ static void	ft_init_events(t_display *display, t_image *image)
 	mlx_hook(display->win_ptr, KeyPress, KeyPressMask, &ft_keys_handler, image);
 	mlx_hook(display->win_ptr, ButtonPress, ButtonPressMask,
 			&ft_button_handler, image);
-	mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
-			&ft_pointer_handler, image);
+	//mlx_hook(display->win_ptr, MotionNotify, PointerMotionMask,
+	//		&ft_pointer_handler, image);
 }
 
 static t_fractal	ft_init_fractal(t_image *image, t_fractal fractal)
 {
-	fractal.max_re = 2;
-	fractal.min_re = -2;
-	fractal.max_im = 2;
-	fractal.min_re = -2;
+	fractal.max_re = 2.0;
+	fractal.min_re = -2.0;
+	fractal.max_im = 2.0;
+	fractal.min_im = -2.0;
 	fractal.max_iter = MAX_ITER;
 	fractal.render = TRUE;
 	fractal.display_ui = FALSE;
@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 	t_image		*image;
 	t_fractal	fractal;
 
-	printf("\n%s\n", argv[2]);
 	fractal = ft_check_args(argc, argv);
 	display = ft_init_display(argv[1]);
 	image = ft_init_image(display);
