@@ -94,7 +94,7 @@ void	ft_reset_ui(t_image *image)
 		mlx_put_image_to_window(image->display->mlx_ptr,
 			image->display->win_ptr, image->image_ptr, 0, 0);
 		mlx_string_put(image->display->mlx_ptr, image->display->win_ptr,
-			15, 20, 0x00ffffff, "Press H for help");
+			15, 20, 0x00ffffff, "H for help");
 		image->fractal.display_ui = FALSE;
 	}
 	else

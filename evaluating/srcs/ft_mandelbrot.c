@@ -57,6 +57,5 @@ void	ft_draw_mandelbrot(t_fractal para, int xrange[2], int yrange[2])
 				ft_draw_pixel(para.image, x, y,
 					para.color_ft(n, para.max_iter));
 		}
-		--y;
 	}
 }

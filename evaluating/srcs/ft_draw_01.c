@@ -60,7 +60,7 @@ void	ft_draw_ui(t_image *image)
 	int	coord[2];
 	int	dim[2];
 
-	coord[0] = WIDTH / 3 + 30;
+	coord[0] = WIDTH / 3;
 	coord[1] = HEIGHT / 3;
 	dim[0] = 250;
 	dim[1] = 100;
