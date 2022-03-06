@@ -16,15 +16,15 @@
 # include "../libs/libft/libft.h"
 # include "../libs/mlx/mlx.h"
 # include <stdio.h>
-# include <stdint.h>
-# include <fcntl.h>
+//# include <stdint.h>
+//# include <fcntl.h>
 # include <math.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <X11/Xlib.h>
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 300
+# define HEIGHT 300
 
 # define TRUE 1
 # define FALSE 0
